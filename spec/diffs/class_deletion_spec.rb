@@ -4,7 +4,7 @@ describe MetaCommit::Extension::RubySupport::Diffs::ClassDeletion do
   let(:type) { MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_DELETION }
   let(:old_file_name) { 'old_file_name' }
   let(:new_file_name) { 'new_file_name' }
-  let(:new_ast_path) { nil }
+  let(:new_ast_path) { MetaCommit::Contracts::ContextualAst.new }
 
   describe '#supports_change' do
     it 'supports deletion where ast is class definition' do
@@ -76,6 +76,26 @@ end
       subject.new_file=new_file_name
       subject.old_lineno=nil
       subject.new_lineno=2
+      subject.old_ast_path=old_ast_path
+      subject.new_ast_path=new_ast_path
+
+      expect(subject.string_representation).to eq('removed class TestClass')
+    end
+    it 'prints change when class name has name from multiple parts' do
+      ast_content = <<-eos
+class TestClass < TestModule::InnerClass[1.0]
+end
+      eos
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      old_ast_path = ContextualNodeCreator.new.create_ast_path_with_whole_file_change(source_ast)
+
+      subject.diff_type=type
+      subject.commit_old=nil
+      subject.commit_new=nil
+      subject.old_file=old_file_name
+      subject.new_file=new_file_name
+      subject.old_lineno=1
+      subject.new_lineno=-1
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 

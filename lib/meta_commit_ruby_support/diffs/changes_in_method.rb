@@ -1,7 +1,9 @@
 module MetaCommit::Extension::RubySupport::Diffs
   class ChangesInMethod < Diff
     def supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)
-      type == MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_REPLACE && !old_ast_path.target_node.empty_ast? && !new_ast_path.target_node.empty_ast? && is_in_context_of_method?(old_ast_path) && is_in_context_of_method?(new_ast_path)
+      type == MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_REPLACE &&
+          contextual_ast_has_target_node(old_ast_path) && contextual_ast_has_target_node(new_ast_path) &&
+          is_in_context_of_method?(old_ast_path) && is_in_context_of_method?(new_ast_path)
     end
 
     def string_representation
