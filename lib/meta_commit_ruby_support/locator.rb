@@ -21,7 +21,6 @@ module MetaCommit::Extension::RubySupport
           MetaCommit::Extension::RubySupport::Diffs::ModuleCreation,
           MetaCommit::Extension::RubySupport::Diffs::ModuleDeletion,
           MetaCommit::Extension::RubySupport::Diffs::ModuleRename,
-          MetaCommit::Extension::RubySupport::Diffs::Diff,
       ]
     end
   end
