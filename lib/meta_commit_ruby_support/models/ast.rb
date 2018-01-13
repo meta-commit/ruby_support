@@ -70,5 +70,21 @@ module MetaCommit::Extension::RubySupport::Models
       @ast.children.first.to_s
     end
 
+    # @return [Array<Ast>]
+    def classes
+      accumulator=[]
+      begin
+        return if empty_ast?
+        return self if is_class?
+        accumulator.concat(children.map {|child| child.classes})
+      rescue NoMethodError
+        return nil
+      end
+      accumulator.flatten.compact
+    end
+
+    def to_s
+      @ast.to_s
+    end
   end
 end
