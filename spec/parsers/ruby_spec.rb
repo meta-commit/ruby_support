@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MetaCommit::Extension::RubySupport::Parsers::Ruby do
   describe '#supported_file_extensions' do
     it 'supports ruby files' do
-      expect(subject.class.supported_file_extensions).to include('rb')
+      expect(subject.class.supported_file_extensions).to include('.rb')
     end
   end
   describe '#supports_syntax?' do

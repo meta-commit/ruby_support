@@ -5,7 +5,7 @@ module MetaCommit::Extension::RubySupport::Parsers
 
     # @return [Array<String>]
     def self.supported_file_extensions
-      ['rb']
+      ['.rb']
     end
 
     # @return [Boolean]
