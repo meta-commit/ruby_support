@@ -10,12 +10,12 @@ module MetaCommit::Extension::RubySupport::Diffs
       if @old_ast_path.target_node.is_method?
         if is_in_context_of_module?(@old_ast_path)
           if is_in_context_of_class?(@old_ast_path)
-            return "removed #{name_of_context_module(old_ast_path)}::#{name_of_context_class(old_ast_path)}##{old_ast_path.target_node.method_name}"
+            return "remove #{name_of_context_module(old_ast_path)}::#{name_of_context_class(old_ast_path)}##{old_ast_path.target_node.method_name}"
           end
-          return "removed method #{old_ast_path.target_node.method_name} from module #{name_of_context_module(old_ast_path)}"
+          return "remove method #{old_ast_path.target_node.method_name} from module #{name_of_context_module(old_ast_path)}"
         end
         if is_in_context_of_class?(@old_ast_path)
-          return "removed #{name_of_context_class(old_ast_path)}##{old_ast_path.target_node.method_name}"
+          return "remove #{name_of_context_class(old_ast_path)}##{old_ast_path.target_node.method_name}"
         end
       end
       "changes in method #{name_of_context_method(old_ast_path)}"

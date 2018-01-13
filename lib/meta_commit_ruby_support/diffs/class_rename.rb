@@ -8,7 +8,7 @@ module MetaCommit::Extension::RubySupport::Diffs
     end
 
     def string_representation
-      "renamed class #{name_of_context_class(old_ast_path)} to #{name_of_context_class(new_ast_path)}"
+      "rename class #{name_of_context_class(old_ast_path)} to #{name_of_context_class(new_ast_path)}"
     end
   end
 end

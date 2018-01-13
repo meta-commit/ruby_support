@@ -57,7 +57,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created TestModule::TestClass')
+      expect(subject.string_representation).to eq('create TestModule::TestClass')
     end
     it 'prints change when is class' do
       ast_content = <<-eos
@@ -79,7 +79,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created TestModule::TestClass')
+      expect(subject.string_representation).to eq('create TestModule::TestClass')
     end
     it 'prints change when is class name in context of module' do
       ast_content = <<-eos
@@ -101,7 +101,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created TestModule::TestClass')
+      expect(subject.string_representation).to eq('create TestModule::TestClass')
     end
     it 'prints change when is class name' do
       ast_content = <<-eos
@@ -121,7 +121,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created class TestClass')
+      expect(subject.string_representation).to eq('create class TestClass')
     end
   end
 end

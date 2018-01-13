@@ -57,7 +57,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('removed class TestClass from module TestModule')
+      expect(subject.string_representation).to eq('remove class TestClass from module TestModule')
     end
     it 'prints change when is class' do
       ast_content = <<-eos
@@ -79,7 +79,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('removed class TestClass')
+      expect(subject.string_representation).to eq('remove class TestClass')
     end
     it 'prints change when class name has name from multiple parts' do
       ast_content = <<-eos
@@ -99,7 +99,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('removed class TestClass')
+      expect(subject.string_representation).to eq('remove class TestClass')
     end
   end
 end

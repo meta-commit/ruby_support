@@ -51,7 +51,7 @@ module MetaCommit::Extension::RubySupport::Diffs
 
     # @return [String]
     def string_representation
-      "#{diff_type} was performed"
+      "perform #{diff_type}"
     end
 
     # @return [Boolean]

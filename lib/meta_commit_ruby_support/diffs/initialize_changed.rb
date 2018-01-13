@@ -12,7 +12,7 @@ module MetaCommit::Extension::RubySupport::Diffs
     end
 
     def string_representation
-      "changes in initialization of #{path_to_component(new_ast_path, 0)}"
+      "change initialization of #{path_to_component(new_ast_path, 0)}"
     end
   end
 end

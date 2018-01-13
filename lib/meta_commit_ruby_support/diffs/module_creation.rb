@@ -16,9 +16,9 @@ module MetaCommit::Extension::RubySupport::Diffs
         return "#{created_class_names.join(',')} added to #{new_ast_path.target_node.module_name}" unless created_class_names.empty?
       end
       if @new_ast_path.target_node.is_module?
-        return "created module #{new_ast_path.target_node.module_name}"
+        return "create module #{new_ast_path.target_node.module_name}"
       end
-      "created module #{name_of_context_module(new_ast_path)}"
+      "create module #{name_of_context_module(new_ast_path)}"
     end
   end
 end

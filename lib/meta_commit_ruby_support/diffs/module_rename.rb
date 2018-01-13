@@ -9,7 +9,7 @@ module MetaCommit::Extension::RubySupport::Diffs
     end
 
     def string_representation
-      "renamed module #{name_of_context_module(old_ast_path)} to #{name_of_context_module(new_ast_path)}"
+      "rename module #{name_of_context_module(old_ast_path)} to #{name_of_context_module(new_ast_path)}"
     end
   end
 end

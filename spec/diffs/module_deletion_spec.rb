@@ -57,7 +57,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('removed module TestModule')
+      expect(subject.string_representation).to eq('remove module TestModule')
     end
     it 'prints change when ast inside empty module' do
       ast_content = <<-eos
@@ -78,7 +78,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('removed module TestModule')
+      expect(subject.string_representation).to eq('remove module TestModule')
     end
   end
 end

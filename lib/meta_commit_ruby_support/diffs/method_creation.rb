@@ -10,12 +10,12 @@ module MetaCommit::Extension::RubySupport::Diffs
       if @new_ast_path.target_node.is_method?
         if is_in_context_of_module?(@new_ast_path)
           if is_in_context_of_class?(@new_ast_path)
-            return "created #{name_of_context_module(new_ast_path)}::#{name_of_context_class(new_ast_path)}##{new_ast_path.target_node.method_name}"
+            return "create #{name_of_context_module(new_ast_path)}::#{name_of_context_class(new_ast_path)}##{new_ast_path.target_node.method_name}"
           end
-          return "created #{name_of_context_module(new_ast_path)}##{new_ast_path.target_node.method_name}"
+          return "create #{name_of_context_module(new_ast_path)}##{new_ast_path.target_node.method_name}"
         end
         if is_in_context_of_class?(@new_ast_path)
-          return "created #{name_of_context_class(new_ast_path)}##{new_ast_path.target_node.method_name}"
+          return "create #{name_of_context_class(new_ast_path)}##{new_ast_path.target_node.method_name}"
         end
       end
       "changes in method #{name_of_context_method(new_ast_path)}"

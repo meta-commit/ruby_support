@@ -8,9 +8,9 @@ module MetaCommit::Extension::RubySupport::Diffs
 
     def string_representation
       if @old_ast_path.target_node.is_module?
-        return "removed module #{old_ast_path.target_node.module_name}"
+        return "remove module #{old_ast_path.target_node.module_name}"
       end
-      "removed module #{name_of_context_module(old_ast_path)}"
+      "remove module #{name_of_context_module(old_ast_path)}"
     end
   end
 end

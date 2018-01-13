@@ -98,7 +98,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('changes in initialization of TestModule::TestClass')
+      expect(subject.string_representation).to eq('change initialization of TestModule::TestClass')
     end
   end
 end

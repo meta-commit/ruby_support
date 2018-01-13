@@ -61,7 +61,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created TestModule::TestClass#test_method')
+      expect(subject.string_representation).to eq('create TestModule::TestClass#test_method')
     end
     it 'prints change when is method in context of module' do
       ast_content = <<-eos
@@ -84,7 +84,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created TestModule#test_method')
+      expect(subject.string_representation).to eq('create TestModule#test_method')
     end
     it 'prints change when is method in context of class' do
       ast_content = <<-eos
@@ -107,7 +107,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('created TestModule#test_method')
+      expect(subject.string_representation).to eq('create TestModule#test_method')
     end
   end
 end

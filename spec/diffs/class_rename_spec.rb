@@ -66,7 +66,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('renamed class TestClass to TestClassNEW')
+      expect(subject.string_representation).to eq('rename class TestClass to TestClassNEW')
     end
   end
 end

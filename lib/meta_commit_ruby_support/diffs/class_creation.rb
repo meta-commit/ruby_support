@@ -9,14 +9,14 @@ module MetaCommit::Extension::RubySupport::Diffs
     def string_representation
       if @new_ast_path.target_node.is_class?
         if is_in_context_of_module?(@new_ast_path)
-          return "created #{name_of_context_module(new_ast_path)}::#{new_ast_path.target_node.class_name}"
+          return "create #{name_of_context_module(new_ast_path)}::#{new_ast_path.target_node.class_name}"
         end
-        return "created class #{new_ast_path.target_node.class_name}"
+        return "create class #{new_ast_path.target_node.class_name}"
       end
       if is_in_context_of_module?(@new_ast_path)
-        return "created #{name_of_context_module(new_ast_path)}::#{name_of_context_class(new_ast_path)}"
+        return "create #{name_of_context_module(new_ast_path)}::#{name_of_context_class(new_ast_path)}"
       end
-      "created class #{name_of_context_class(new_ast_path)}"
+      "create class #{name_of_context_class(new_ast_path)}"
     end
   end
 end

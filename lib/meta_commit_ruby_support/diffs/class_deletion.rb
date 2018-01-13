@@ -9,11 +9,11 @@ module MetaCommit::Extension::RubySupport::Diffs
     def string_representation
       if @old_ast_path.target_node.is_class?
         if is_in_context_of_module?(@old_ast_path)
-          return "removed class #{old_ast_path.target_node.class_name} from module #{name_of_context_module(old_ast_path)}"
+          return "remove class #{old_ast_path.target_node.class_name} from module #{name_of_context_module(old_ast_path)}"
         end
-        return "removed class #{old_ast_path.target_node.class_name}"
+        return "remove class #{old_ast_path.target_node.class_name}"
       end
-      "removed class #{name_of_context_class(old_ast_path)}"
+      "remove class #{name_of_context_class(old_ast_path)}"
     end
   end
 end
