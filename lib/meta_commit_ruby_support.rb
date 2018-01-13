@@ -8,6 +8,7 @@ module MetaCommit
 end
 
 require "meta_commit_contracts"
+require "meta_commit_ruby_support/helpers/contextual_ast_accessor"
 # parsers
 require "meta_commit_ruby_support/parsers/ruby"
 # diffs

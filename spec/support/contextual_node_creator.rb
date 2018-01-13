@@ -1,15 +1,25 @@
 class ContextualNodeCreator
 
   # @param [MetaCommit::Contracts::Ast] source_ast
+  # @return [MetaCommit::Contracts::ContextualAst]
+  def create_ast_path_with_whole_file_change(source_ast)
+    contextual_ast = MetaCommit::Contracts::ContextualAst.new
+    contextual_ast.parser_class = source_ast.parser_class
+    contextual_ast.target_node = source_ast
+    contextual_ast.context_nodes = []
+    contextual_ast
+  end
+
+  # @param [MetaCommit::Contracts::Ast] source_ast
   # @param [Integer] line_number
   # @return [MetaCommit::Contracts::ContextualAst]
   def create_ast_path(source_ast, line_number)
     visited_nodes = []
-    ast_path = MetaCommit::Contracts::ContextualAst.new
-    ast_path.parser_class = source_ast.parser_class
-    ast_path.target_node = collect_path_to_ast_at_line(source_ast, line_number, visited_nodes)
-    ast_path.context_nodes = visited_nodes
-    ast_path
+    contextual_ast = MetaCommit::Contracts::ContextualAst.new
+    contextual_ast.parser_class = source_ast.parser_class
+    contextual_ast.target_node = collect_path_to_ast_at_line(source_ast, line_number, visited_nodes)
+    contextual_ast.context_nodes = visited_nodes
+    contextual_ast
   end
 
   # @param [MetaCommit::Contracts::Ast] ast
