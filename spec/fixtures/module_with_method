@@ -1,0 +1,5 @@
+module TestModule
+    def test_method
+
+    end
+end

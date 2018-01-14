@@ -1,0 +1,6 @@
+module TestModuleNEW
+  class TestClass
+    def test_method
+    end
+  end
+end

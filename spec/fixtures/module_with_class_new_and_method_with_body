@@ -1,0 +1,9 @@
+module TestModule
+  class TestClassNEW
+    def test_method
+        a=2+2
+        b=4+4
+        c=3+3
+    end
+  end
+end

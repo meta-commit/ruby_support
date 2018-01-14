@@ -8,29 +8,12 @@ describe MetaCommit::Extension::RubySupport::Diffs::MethodDeletion do
 
   describe '#supports_change' do
     it 'supports addition where ast is method definition' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-    def test_method
-    end
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 3)
       expect(subject.supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)).to be true
     end
     it 'supports addition where ast is in context of method' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-    def test_method
-
-    end
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 4)
 
       expect(subject.supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)).to be true
@@ -39,16 +22,7 @@ end
 
   describe '#string_representation' do
     it 'prints change when is method in context of module and class' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-    def test_method
-
-    end
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 3)
 
       subject.diff_type=type
@@ -63,15 +37,8 @@ end
 
       expect(subject.string_representation).to eq('remove TestModule::TestClass#test_method')
     end
-    it 'prints change when is method in context of module' do
-      ast_content = <<-eos
-module TestModule
-    def test_method
-
-    end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+    it 'prints change when method is in context of module' do
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 2)
 
       subject.diff_type=type
@@ -86,15 +53,8 @@ end
 
       expect(subject.string_representation).to eq('remove method test_method from module TestModule')
     end
-    it 'prints change when is method in context of class' do
-      ast_content = <<-eos
-class TestModule
-    def test_method
-
-    end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+    it 'prints change when method is in context of class' do
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('class_with_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 2)
 
       subject.diff_type=type
@@ -107,7 +67,7 @@ end
       subject.old_ast_path=old_ast_path
       subject.new_ast_path=new_ast_path
 
-      expect(subject.string_representation).to eq('remove TestModule#test_method')
+      expect(subject.string_representation).to eq('remove TestClass#test_method')
     end
   end
 end

@@ -1,0 +1,7 @@
+module TestModule
+  class TestClass
+    def initialize(param1)
+        a = 2+2
+    end
+  end
+end

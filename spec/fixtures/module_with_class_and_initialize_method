@@ -1,0 +1,6 @@
+module TestModule
+  class TestClass
+    def initialize
+    end
+  end
+end

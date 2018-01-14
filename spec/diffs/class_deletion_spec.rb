@@ -8,28 +8,12 @@ describe MetaCommit::Extension::RubySupport::Diffs::ClassDeletion do
 
   describe '#supports_change' do
     it 'supports deletion where ast is class definition' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-    def test_method
-    end
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 2)
       expect(subject.supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)).to be true
     end
     it 'supports deletion where ast is end of class definition' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-    def test_method
-    end
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 5)
 
       expect(subject.supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)).to be true
@@ -38,13 +22,7 @@ end
 
   describe '#string_representation' do
     it 'prints change when is class in context of module' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 3)
 
       subject.diff_type=type
@@ -60,13 +38,7 @@ end
       expect(subject.string_representation).to eq('remove class TestClass from module TestModule')
     end
     it 'prints change when is class' do
-      ast_content = <<-eos
-module TestModule
-  class TestClass
-  end
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(source_ast, 2)
 
       subject.diff_type=type
@@ -82,11 +54,7 @@ end
       expect(subject.string_representation).to eq('remove class TestClass')
     end
     it 'prints change when class name has name from multiple parts' do
-      ast_content = <<-eos
-class TestClass < TestModule::InnerClass[1.0]
-end
-      eos
-      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(ast_content)
+      source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('inherited_class'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path_with_whole_file_change(source_ast)
 
       subject.diff_type=type

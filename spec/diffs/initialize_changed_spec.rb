@@ -7,55 +7,19 @@ describe MetaCommit::Extension::RubySupport::Diffs::InitializeChanged do
 
   describe '#supports_change' do
     it 'supports replace where both ast are #initialize method signature changes' do
-      old_ast_content = <<-eos
-module TestModule
-  class TestClass
-    def initialize
-
-    end
-  end
-end
-      eos
-      old_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(old_ast_content)
+      old_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_initialize_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(old_source_ast, 3)
 
-      new_ast_content = <<-eos
-module TestModule
-  class TestClass
-    def initialize(param1)
-
-    end
-  end
-end
-      eos
-      new_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(new_ast_content)
+      new_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_initialize_method'))
       new_ast_path = ContextualNodeCreator.new.create_ast_path(new_source_ast, 3)
 
       expect(subject.supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)).to be true
     end
     it 'supports replace where ast are changes inside #initialize method' do
-      old_ast_content = <<-eos
-module TestModule
-  class TestClass
-    def initialize
-      a = 1 + 1
-    end
-  end
-end
-      eos
-      old_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(old_ast_content)
+      old_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_initialize_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(old_source_ast, 4)
 
-      new_ast_content = <<-eos
-module TestModule
-  class TestClass
-    def initialize(param1)
-
-    end
-  end
-end
-      eos
-      new_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(new_ast_content)
+      new_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_initialize_with_params_method'))
       new_ast_path = ContextualNodeCreator.new.create_ast_path(new_source_ast, 3)
 
       expect(subject.supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)).to be true
@@ -64,28 +28,10 @@ end
 
   describe '#string_representation' do
     it 'prints change' do
-      old_ast_content = <<-eos
-module TestModule
-  class TestClass
-    def initialize
-      a = 1 + 1
-    end
-  end
-end
-      eos
-      old_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(old_ast_content)
+      old_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_initialize_method'))
       old_ast_path = ContextualNodeCreator.new.create_ast_path(old_source_ast, 4)
 
-      new_ast_content = <<-eos
-module TestModule
-  class TestClass
-    def initialize(param1)
-
-    end
-  end
-end
-      eos
-      new_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(new_ast_content)
+      new_source_ast = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(file_fixture('module_with_class_and_method'))
       new_ast_path = ContextualNodeCreator.new.create_ast_path(new_source_ast, 3)
 
       subject.diff_type=type

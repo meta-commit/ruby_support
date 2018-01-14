@@ -1,0 +1,4 @@
+module TestModule
+  class TestClass
+  end
+end
