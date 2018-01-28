@@ -12,16 +12,7 @@ module MetaCommit::Extension::RubySupport::Diffs
   class Diff < MetaCommit::Contracts::Diff
     include MetaCommit::Extension::RubySupport::Helpers::ContextualAstAccessor
 
-    TYPE_ADDITION = :addition
-    TYPE_DELETION = :deletion
-    TYPE_REPLACE = :replace
     SUPPORTED_PARSERS = [MetaCommit::Extension::RubySupport::Parsers::Ruby]
-
-    attr_accessor :diff_type
-    attr_accessor :commit_old, :commit_new
-    attr_accessor :old_file, :new_file
-    attr_accessor :old_lineno, :new_lineno
-    attr_accessor :old_ast_path, :new_ast_path
 
     # @param [Class] parser
     # @return [Boolean]
@@ -29,13 +20,9 @@ module MetaCommit::Extension::RubySupport::Diffs
       SUPPORTED_PARSERS.include?(parser)
     end
 
-    # @param [Symbol] type
-    # @param [String] old_file_name
-    # @param [String] new_file_name
-    # @param [String] old_ast_path
-    # @param [String] new_ast_path
+    # @param [MetaCommit::Contracts::ChangeContext] context
     # @return [Boolean]
-    def supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)
+    def supports_change(context)
       true
     end
 
@@ -51,22 +38,22 @@ module MetaCommit::Extension::RubySupport::Diffs
 
     # @return [String]
     def string_representation
-      "perform #{diff_type}"
+      "perform #{change_context.type}"
     end
 
     # @return [Boolean]
     def type_addition?
-      @diff_type == TYPE_ADDITION
+      change_context.type == TYPE_ADDITION
     end
 
     # @return [Boolean]
     def type_deletion?
-      @diff_type == TYPE_DELETION
+      change_context.type == TYPE_DELETION
     end
 
     # @return [Boolean]
     def type_replace?
-      @diff_type == TYPE_REPLACE
+      change_context.type == TYPE_REPLACE
     end
   end
 end

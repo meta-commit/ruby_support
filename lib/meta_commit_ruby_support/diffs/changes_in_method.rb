@@ -1,16 +1,16 @@
 module MetaCommit::Extension::RubySupport::Diffs
   class ChangesInMethod < Diff
-    def supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)
-      type == MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_REPLACE &&
-          contextual_ast_has_target_node(old_ast_path) && contextual_ast_has_target_node(new_ast_path) &&
-          is_in_context_of_method?(old_ast_path) && is_in_context_of_method?(new_ast_path)
+    def supports_change(context)
+      context.type == MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_REPLACE &&
+          contextual_ast_has_target_node(context.old_contextual_ast) && contextual_ast_has_target_node(context.new_contextual_ast) &&
+          is_in_context_of_method?(context.old_contextual_ast) && is_in_context_of_method?(context.new_contextual_ast)
     end
 
     def string_representation
-      if is_in_context_of_class?(@new_ast_path)
-        return "changes in #{name_of_context_class(new_ast_path)}##{name_of_context_method(new_ast_path)}"
+      if is_in_context_of_class?(change_context.new_contextual_ast)
+        return "changes in #{name_of_context_class(change_context.new_contextual_ast)}##{name_of_context_method(change_context.new_contextual_ast)}"
       end
-      "changes in ##{name_of_context_method(new_ast_path)}"
+      "changes in ##{name_of_context_method(change_context.new_contextual_ast)}"
     end
   end
 end

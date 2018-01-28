@@ -1,16 +1,16 @@
 module MetaCommit::Extension::RubySupport::Diffs
   class ModuleDeletion < Diff
-    def supports_change(type, old_file_name, new_file_name, old_ast_path, new_ast_path)
-      type == MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_DELETION &&
-          contextual_ast_has_target_node(old_ast_path) &&
-          (old_ast_path.target_node.is_module? || is_name_of_module?(old_ast_path))
+    def supports_change(context)
+      context.type == MetaCommit::Extension::RubySupport::Diffs::Diff::TYPE_DELETION &&
+          contextual_ast_has_target_node(context.old_contextual_ast) &&
+          (context.old_contextual_ast.target_node.is_module? || is_name_of_module?(context.old_contextual_ast))
     end
 
     def string_representation
-      if @old_ast_path.target_node.is_module?
-        return "remove module #{old_ast_path.target_node.module_name}"
+      if change_context.old_contextual_ast.target_node.is_module?
+        return "remove module #{change_context.old_contextual_ast.target_node.module_name}"
       end
-      "remove module #{name_of_context_module(old_ast_path)}"
+      "remove module #{name_of_context_module(change_context.old_contextual_ast)}"
     end
   end
 end
