@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject {|f| f.match(%r{^(test|spec|features)/})}
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "meta_commit_contracts", "~> 0.3.2"
+  spec.add_runtime_dependency "meta_commit_contracts", "~> 0"
   spec.add_runtime_dependency "parser", "2.3.0"
 
   spec.add_development_dependency "bundler",      "~> 1.15"

@@ -1,14 +1,5 @@
 module MetaCommit::Extension::RubySupport::Diffs
   # Base class for diffs
-  # @attr [Symbol] diff_type
-  # @attr [String] commit_old
-  # @attr [String] commit_new
-  # @attr [String] old_file
-  # @attr [String] new_file
-  # @attr [String] old_lineno
-  # @attr [String] new_lineno
-  # @attr [MetaCommit::Models::ContextualAstNode] old_ast_path
-  # @attr [MetaCommit::Models::ContextualAstNode] new_ast_path
   class Diff < MetaCommit::Contracts::Diff
     include MetaCommit::Extension::RubySupport::Helpers::ContextualAstAccessor
 
