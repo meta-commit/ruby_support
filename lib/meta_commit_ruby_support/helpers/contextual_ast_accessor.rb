@@ -15,13 +15,13 @@ module MetaCommit::Extension::RubySupport::Helpers
     # on created class only first line goes to diff
     # @param [MetaCommit::Model::ContextualAstNode] ast
     def is_name_of_class?(ast)
-      (ast.target_node.ast.type == :const) and (ast.context_nodes.length > 1) and (ast.context_nodes[ast.context_nodes.length - 1 - 1].ast.type == :class)
+      (ast.target_node.type == :const) and (ast.context_nodes.length > 1) and (ast.context_nodes[ast.context_nodes.length - 1 - 1].type == :class)
     end
 
     # on created module only first line goes to diff
     # @param [MetaCommit::Model::ContextualAstNode] ast
     def is_name_of_module?(ast)
-      (ast.target_node.ast.type == :const) and (ast.context_nodes.length > 1) and (ast.context_nodes[ast.context_nodes.length - 1 - 1].ast.type == :module)
+      (ast.target_node.type == :const) and (ast.context_nodes.length > 1) and (ast.context_nodes[ast.context_nodes.length - 1 - 1].type == :module)
     end
 
     # @param [MetaCommit::Model::ContextualAstNode] ast

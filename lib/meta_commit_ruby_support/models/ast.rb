@@ -11,8 +11,12 @@ module MetaCommit::Extension::RubySupport::Models
 
     # @return [Array<MetaCommit::Contracts::Ast>]
     def children
-      @ast.children
-          .map {|child| Ast.new(child)}
+      begin
+        @ast.children
+            .map {|child| Ast.new(child)}
+      rescue NoMethodError
+        return []
+      end
     end
 
     # @return [Integer]
@@ -42,17 +46,23 @@ module MetaCommit::Extension::RubySupport::Models
 
     # @return [Boolean]
     def is_module?
-      @ast.type == :module
+      type == :module
     end
 
     # @return [Boolean]
     def is_class?
-      @ast.type == :class
+      type == :class
     end
 
     # @return [Boolean]
     def is_method?
-      @ast.type == :def
+      type == :def
+    end
+
+    # @return [Symbol]
+    def type
+      return @ast.class.to_s.to_sym unless @ast.respond_to?(:type)
+      @ast.type
     end
 
     # @return [String]

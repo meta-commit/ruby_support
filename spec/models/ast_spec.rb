@@ -20,6 +20,14 @@ describe MetaCommit::Extension::RubySupport::Models::Ast do
       expect(ast.children).to all(be_a(MetaCommit::Contracts::Ast))
       expect(ast.children.length).to be 2
     end
+    it 'returns empty array for symbol array' do
+      code = MetaCommit::Extension::RubySupport::Parsers::Ruby.new.parse(':element')
+
+      ast = MetaCommit::Extension::RubySupport::Models::Ast.new(code)
+
+      expect(ast.children.first.children).to be_an_instance_of(Array)
+      expect(ast.children.first.children.size).to eq(0)
+    end
   end
   describe '#first_line' do
     it 'returns first line number of ast location' do
