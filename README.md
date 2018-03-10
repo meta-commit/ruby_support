@@ -1,7 +1,7 @@
 # meta_commit ruby support
 [![Build Status](https://travis-ci.org/meta-commit/ruby_support.svg?branch=master)](https://travis-ci.org/meta-commit/ruby_support)
 
-This gem adds ruby (version 2.3) support to [meta_commit](https://github.com/usernam3/meta_commit) commands
+This gem adds ruby (version 2.5) support to [meta_commit](https://github.com/usernam3/meta_commit) commands
 
 ## Installation
 
